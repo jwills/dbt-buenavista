@@ -10,5 +10,5 @@ Plugin = AdapterPlugin(
     adapter=BVDuckDBAdapter,
     credentials=BVDuckDBCredentials,
     include_path=bv_duckdb.PACKAGE_PATH,
-    dependencies=["duckdb"]
+    dependencies=["duckdb"],
 )

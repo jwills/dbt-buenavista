@@ -10,5 +10,5 @@ Plugin = AdapterPlugin(
     adapter=BVPostgresAdapter,
     credentials=BVPostgresCredentials,
     include_path=bv_postgres.PACKAGE_PATH,
-    dependencies=["postgres"]
+    dependencies=["postgres"],
 )

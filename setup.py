@@ -21,7 +21,7 @@ setup(
     author="Josh Wills",
     author_email="joshwills+dbt@gmail.com",
     url="https://github.com/jwills/dbt-buenavista",
-    packages=find_namespace_packages(include=["dbt", "dbt.*"]),
+    packages=find_namespace_packages(include=["common", "dbt", "dbt.*"]),
     include_package_data=True,
     install_requires=[
         "dbt-core~=1.3.0",
