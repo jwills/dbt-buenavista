@@ -14,4 +14,4 @@ class BVDuckDBAdapter(DuckDBAdapter):
         connection = self.connections.get_if_exists()
         if not connection:
             connection = self.connections.get_thread_connection()
-        return python_job.submit(connection, self.config.credentials, parsed_model, compiled_code)
+        return python_job.submit(connection, parsed_model, compiled_code)
