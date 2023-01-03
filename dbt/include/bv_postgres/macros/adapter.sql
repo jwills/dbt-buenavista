@@ -28,8 +28,10 @@ def materialize(df, con):
     con.execute(create_table_stmt)
 
     output = io.StringIO()
-    df.to_csv(output, sep='\t', header=False, index=False)
+    df.to_csv(output, na_rep='null', header=False, index=False)
     output.seek(0)
-    con.copy_expert(f"COPY {tbl} FROM STDIN", output)
+    with con.copy(f"COPY {tbl} FROM STDIN WITH DELIMITER ',' NULL AS 'null' CSV") as copy:
+        while data := output.read(8192):
+            copy.write(data)
 {% endmacro %}
 
