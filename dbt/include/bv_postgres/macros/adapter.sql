@@ -25,13 +25,11 @@ def materialize(df, con):
     import io
     tbl = ".".join([ "{{ relation.schema }}", "{{ relation.identifier }}"])
     create_table_stmt = pd.io.sql.get_schema(df, "__placeholder__").replace("\"__placeholder__\"", tbl)
-    print(create_table_stmt)
     con.execute(create_table_stmt)
 
     output = io.StringIO()
     df.to_csv(output, sep='\t', header=False, index=False)
     output.seek(0)
-    print("doing copy")
     con.copy_expert(f"COPY {tbl} FROM STDIN", output)
 {% endmacro %}
 
