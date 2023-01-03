@@ -11,7 +11,4 @@ class BVPostgresAdapter(PostgresAdapter):
     def submit_python_job(
         self, parsed_model: dict, compiled_code: str
     ) -> AdapterResponse:
-        connection = self.connections.get_if_exists()
-        if not connection:
-            connection = self.connections.get_thread_connection()
-        return python_job.submit(connection, parsed_model, compiled_code)
+        return python_job.submit(self, parsed_model, compiled_code)
