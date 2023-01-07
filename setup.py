@@ -28,6 +28,7 @@ setup(
         "dbt-postgres~=1.3.0",
     ],
     extras_require={
+        "dev": ["buenavista"],
         "duckdb": ["dbt-duckdb~=1.3.0"],
     },
 )
