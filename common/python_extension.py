@@ -2,9 +2,8 @@ import importlib.util
 import os
 import tempfile
 
-from .helpers import SimpleQueryResult
-from buenavista.adapter import AdapterHandle, Extension, QueryResult
-
+from buenavista.adapter import AdapterHandle, Extension, QueryResult, SimpleQueryResult
+from buenavista.types import PGTypes
 
 class DbtPythonRunner(Extension):
     def type(self) -> str:
@@ -31,6 +30,6 @@ class DbtPythonRunner(Extension):
             dbt = module.dbtObj(handle.load_df_function)
             df = module.model(dbt, cursor)
             module.materialize(df, cursor)
-            return SimpleQueryResult("msg", "Success")
+            return SimpleQueryResult("msg", "Success", PGTypes.TEXT)
         finally:
             os.unlink(mod_file.name)
