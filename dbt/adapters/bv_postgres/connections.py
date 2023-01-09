@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 
+from common.credentials import BVCredentials
 from dbt.adapters.postgres.connections import (  # type:ignore
     PostgresConnectionManager,
-    PostgresCredentials,
 )
 
 
 @dataclass
-class BVPostgresCredentials(PostgresCredentials):
+class BVPostgresCredentials(BVCredentials):
     @property
     def type(self) -> str:
         return "bv_postgres"

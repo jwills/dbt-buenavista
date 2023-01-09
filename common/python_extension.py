@@ -6,6 +6,8 @@ from buenavista.adapter import AdapterHandle, Extension, QueryResult, SimpleQuer
 from buenavista.types import PGTypes
 
 class DbtPythonRunner(Extension):
+    """An extension for the BuenaVista server that handles Python model generation in dbt."""
+
     def type(self) -> str:
         return "dbt_python_job"
 
