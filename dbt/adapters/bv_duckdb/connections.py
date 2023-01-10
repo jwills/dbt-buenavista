@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from common.credentials import BVCredentials
+from dbt.adapters.bv_base.credentials import BVCredentials
 from dbt.adapters.postgres.connections import (  # type:ignore
     PostgresConnectionManager,
 )

@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     # includes vars, profile, target
     parser = _build_base_subparser()
-    args, _unknown = parser.parse_known_args()
+    args, _ = parser.parse_known_args()
 
     # dbt-core does os.chdir(project_dir) before reaching this location
     # from https://github.com/dbt-labs/dbt-core/blob/73116fb816498c4c45a01a2498199465202ec01b/core/dbt/task/base.py#L186
@@ -85,11 +85,15 @@ if __name__ == "__main__":
 
     bv_dict = Profile._get_profile_data(raw_profile, profile_name, target_name)
     delegate = bv_dict.get("delegate")
-    assert delegate, "bv_* targets must have a delegate field set"
+    assert delegate, "buenavista targets must have a delegate field set"
 
-    base_profile = Profile.from_raw_profiles(
+    base_profile_dict = Profile.from_raw_profiles(
         raw_profiles,
         profile_name,
         renderer=profile_renderer,
         target_override=delegate,
-    )
+    ).to_target_dict()
+
+    bv_server = create(bv_dict, base_profile_dict)
+    print(f"Starting Buena Vista server at {bv_server.server_address}")
+    bv_server.serve_forever()

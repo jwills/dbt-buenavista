@@ -1,6 +1,6 @@
 from dbt.adapters.duckdb.impl import DuckDBAdapter  # type:ignore
 
-from common import python_job
+from dbt.adapters.bv_base import python_job
 from dbt.adapters.bv_duckdb.connections import BVDuckDBConnectionManager
 from dbt.contracts.connection import AdapterResponse
 
