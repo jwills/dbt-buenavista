@@ -5,19 +5,20 @@ import tempfile
 from buenavista.adapter import AdapterHandle, Extension, QueryResult, SimpleQueryResult
 from buenavista.types import PGTypes
 
+
 class DbtPythonRunner(Extension):
     """An extension for the BuenaVista server that handles Python model generation in dbt."""
 
     def type(self) -> str:
         return "dbt_python_job"
 
-    def apply(self, job: dict, handle: AdapterHandle) -> QueryResult:
+    def apply(self, params: dict, handle: AdapterHandle) -> QueryResult:
         mod_file = tempfile.NamedTemporaryFile(suffix=".py", delete=False)
-        mod_file.write(job["module_definition"].lstrip().encode("utf-8"))
+        mod_file.write(params["module_definition"].lstrip().encode("utf-8"))
         mod_file.close()
         try:
             spec = importlib.util.spec_from_file_location(
-                job["module_name"],
+                params["module_name"],
                 mod_file.name,
             )
             if not spec:

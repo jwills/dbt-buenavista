@@ -24,10 +24,7 @@ setup(
     packages=find_namespace_packages(include=["dbt", "dbt.*"]),
     include_package_data=True,
     install_requires=[
-        "buenavista",
-        "dbt-core~=1.3.0",
         "dbt-postgres~=1.3.0",
-        "typer",
     ],
     extras_require={
         "duckdb": ["dbt-duckdb~=1.3.0"],

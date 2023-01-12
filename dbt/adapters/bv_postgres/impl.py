@@ -1,6 +1,6 @@
 from dbt.adapters.postgres.impl import PostgresAdapter  # type:ignore
 
-from dbt.adapters.bv_base import python_job
+from dbt.adapters.buenavista import python_job
 from dbt.adapters.bv_postgres.connections import BVPostgresConnectionManager
 from dbt.contracts.connection import AdapterResponse
 

@@ -4,13 +4,21 @@ from typing import Optional
 from dbt.adapters.base import Credentials
 from dbt.helper_types import Port
 
+
 @dataclass
 class BVCredentials(Credentials):
     host: str
-    user: str
     port: Port
-    password: str  # on postgres the password is mandatory
-    delegate: str  # on BV targets the delegate is mandatory
+
+    # everything else on bv is optional atm
+    user: Optional[str] = "dbt"
+    password: Optional[str] = "password"
+
+    # Used when we are running everything locally off of the profile.yml file
+    api_port: Optional[int] = None
+    delegate: Optional[str] = None  # on BV targets the delegate is mandatory
+
+    # things copied over from the Postgres credentials
     connect_timeout: int = 10
     role: Optional[str] = None
     search_path: Optional[str] = None
